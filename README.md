@@ -1,2 +1,2 @@
 # fractal-sets
-I love fractal geometry. A ton. Modelling my favourite sets. 
+I love fractal geometry. Modelling my favourite sets. 
