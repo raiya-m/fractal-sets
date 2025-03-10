@@ -62,15 +62,8 @@ int main () {
     double max_i;
 
     if (!fin) {
-        std::cout << "input.txt was not found...using some default values to model." << std::endl;
-        image_width = 512;
-        image_height = 512; 
-        max_n = 255;
-
-        min_r = -1.5;
-        max_r = 0.7; 
-        min_i = -1.0; 
-        max_i = 1.0;
+        std::cout << "input.txt was not found." << std::endl;
+        return 0; 
     }
 
     else {
@@ -94,9 +87,9 @@ int main () {
             int n = find_escape(cr, ci, max_n); 
 
             //map to rgb value (this'll be greyscale)
-            int r = (n % 256); 
-            int g = (n % 256);
-            int b = (n % 256);
+            int r = (n % 255); 
+            int g = (n % 255);
+            int b = (n % 255);
 
             fout << r << " " << g << " " << b << " ";
         }
