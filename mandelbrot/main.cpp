@@ -24,6 +24,19 @@ min_i -> minimum imaginary value
 max_i -> maximum imaginary  value 
 */
 
+int find_escape(double cr, double ci, int max_iterations) {
+    int i = 0; 
+    double zr = 0.0; 
+    double zi = 0.0; 
+
+    while (i < max_iterations && zr * zr + zi * zi < 4.0) { //predet calculation to determine if ∈ mandelbrot
+        double temp = zr * zr - zi * zi + cr; 
+        zi = 2.0 * zr * zi + ci;
+        zr = temp; 
+        i++;
+    }
+}
+
 double map_to_real (int x, int image_width, double min_r, double max_r) {
     double range = max_r - min_r; 
     return x * (range/image_width) + min_r; 
@@ -66,7 +79,20 @@ int main () {
     //pixel by pixel: 
     for (int y{0}; y < image_height; y++) { 
         for (int x{0}; x < image_width; x++) {
+            double cr = map_to_real(x, image_width, min_r, max_r);
+            double ci = map_to_imaginary(y, image_height, min_i, max_i);
 
+            int n = find_escape(cr, ci, max_n); 
+
+            //map to rgb value (this'll be greyscale)
+            int r = (n % 256); 
+            int g = (n % 256);
+            int b = (n % 256);
+
+            fout << r << " " << g << " " << b << " ";
         }
+        fout << std::endl; 
     }
+    std::cout << "complete!" << std::endl; 
+    return 0; 
 }
