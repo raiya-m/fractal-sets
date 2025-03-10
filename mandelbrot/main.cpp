@@ -16,7 +16,7 @@ to generate Mandelbrot images, each pixel (x,y) will be mapped to a correspondin
 the Mandelbrot formula for this c, counting the number of iterations it takes for the sequence to escape the iteration limit. 
 this count will then be translated into a specific rgb colour!
 
-some variable definitions...
+some variable descriptions...
 max_n -> maximum number of iterations before we decide if a point escapes 
 min_r -> minimum real number value 
 max_r -> maximum real number value 
@@ -24,3 +24,38 @@ min_i -> minimum imaginary value
 max_i -> maximum imaginary  value 
 */
 
+int main () {
+    std::ifstream fin("input.txt"); 
+
+    int image_width; 
+    int image_height; 
+    int max_n;
+
+    double min_r; 
+    double max_r; 
+    double min_i; 
+    double max_i;
+
+    if (!fin) {
+        std::cout << "error, could not open file :()" << std::endl;
+        std::cin.ignore(); 
+        return 0; //end program early 
+    }
+
+    fin >> image_width >> image_height >> max_n;
+    fin >> min_r >> max_r >> min_i >> max_i;
+    
+    //the ppm header
+    std::ofstream fout("output_image.ppm");
+    
+    fout << "P3" <<std::endl; //to identify that we are using a ppm file
+    fout << image_width << " " << image_height << std::endl; 
+    fout << "256" << std::endl; 
+
+    //pixel by pixel: 
+    for (int i{0}; i < image_height; i++) { 
+        for (int j{0}; j < image_width; j++) {
+
+        }
+    }
+}
