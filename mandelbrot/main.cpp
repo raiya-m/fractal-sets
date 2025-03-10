@@ -35,6 +35,7 @@ int find_escape(double cr, double ci, int max_iterations) {
         zr = temp; 
         i++;
     }
+    return i;
 }
 
 double map_to_real (int x, int image_width, double min_r, double max_r) {
@@ -61,13 +62,21 @@ int main () {
     double max_i;
 
     if (!fin) {
-        std::cout << "error, could not open file :()" << std::endl;
-        std::cin.ignore(); 
-        return 0; //end program early 
+        std::cout << "input.txt was not found...using some default values to model." << std::endl;
+        image_width = 512;
+        image_height = 512; 
+        max_n = 255;
+
+        min_r = -1.5;
+        max_r = 0.7; 
+        min_i = -1.0; 
+        max_i = 1.0;
     }
 
-    fin >> image_width >> image_height >> max_n;
-    fin >> min_r >> max_r >> min_i >> max_i;
+    else {
+        fin >> image_width >> image_height >> max_n;
+        fin >> min_r >> max_r >> min_i >> max_i;
+    }
     
     //the ppm header
     std::ofstream fout("output_image.ppm");
@@ -77,8 +86,8 @@ int main () {
     fout << "256" << std::endl; 
 
     //pixel by pixel: 
-    for (int y{0}; y < image_height; y++) { 
-        for (int x{0}; x < image_width; x++) {
+    for (int y = 0; y < image_height; y++) { 
+        for (int x = 0; x < image_width; x++) {
             double cr = map_to_real(x, image_width, min_r, max_r);
             double ci = map_to_imaginary(y, image_height, min_i, max_i);
 
