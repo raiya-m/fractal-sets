@@ -24,6 +24,17 @@ min_i -> minimum imaginary value
 max_i -> maximum imaginary  value 
 */
 
+double map_to_real (int x, int image_width, double min_r, double max_r) {
+    double range = max_r - min_r; 
+    return x * (range/image_width) + min_r; 
+
+}
+
+double map_to_imaginary (int y, int image_height, double min_i, double max_i) {
+    double range = max_i - min_i; 
+    return y * (range/image_height) + min_i;
+}
+
 int main () {
     std::ifstream fin("input.txt"); 
 
@@ -48,13 +59,13 @@ int main () {
     //the ppm header
     std::ofstream fout("output_image.ppm");
     
-    fout << "P3" <<std::endl; //to identify that we are using a ppm file
+    fout << "P3" << std::endl; //to identify that we are using a ppm file
     fout << image_width << " " << image_height << std::endl; 
     fout << "256" << std::endl; 
 
     //pixel by pixel: 
-    for (int i{0}; i < image_height; i++) { 
-        for (int j{0}; j < image_width; j++) {
+    for (int y{0}; y < image_height; y++) { 
+        for (int x{0}; x < image_width; x++) {
 
         }
     }
