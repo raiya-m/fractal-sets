@@ -9,16 +9,16 @@ same concept as mandelbrot, except absolute values are taken; insanely cool visu
 */
 
 //mapping to real function
-int map_to_real() {
+int map_to_real(int x, int image_width, double min_r, double max_r) {
 
 }
 
 //mapping to imaginary function
-int map_to_imaginary() {
+int map_to_imaginary(int y, int image_height, double min_i, double max_i) {
 
 }
 //determining the escape value function
-int find_escape() {
+int find_escape(double cr, double ci, int max_iterations) {
     
 }
 
