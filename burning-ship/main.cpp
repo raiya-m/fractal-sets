@@ -52,11 +52,12 @@ int main () {
     fout << image_width << " " << image_height << std::endl; 
     fout << "256" << std::endl;
 
-    for (int i = 0; i < max_n; ++i) {
-        for (int j = 0; j < max_n; ++j) {
+    for (int y = 0; y < image_height; ++y) {
+        for (int x = 0; x < image_width; ++x) {
+            //call functions
 
         }
     }
-
     std::cout << "complete!" << std::endl;
+    return 0; 
 }
