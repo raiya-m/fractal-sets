@@ -41,11 +41,22 @@ int main () {
         return 0; 
     }
 
+    else {
+        fin >> image_height >> image_width >> max_n; 
+        fin >> min_i >> max_i >> min_r >> max_r; 
+    }
 
-    
-    //read from input.txt
-    //create ppm header from input.txt
-    //nested pixel-by-pixel loop & call functions
-    //within loop output map to set rgb values 
-    //output 
+    std::ofstream fout("output.ppm");
+
+    fout << "P3" << std::endl;
+    fout << image_width << " " << image_height << std::endl; 
+    fout << "256" << std::endl;
+
+    for (int i = 0; i < max_n; ++i) {
+        for (int j = 0; j < max_n; ++j) {
+
+        }
+    }
+
+    std::cout << "complete!" << std::endl;
 }
