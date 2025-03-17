@@ -22,7 +22,17 @@ double map_to_imaginary (int y, int image_height, double min_i, double max_i) {
 }
 //determining the escape value function
 int find_escape(double cr, double ci, int max_iterations) {
-    
+    int i = 0; 
+    double zr = 0.0; 
+    double zi = 0.0; 
+
+    while (i < max_iterations && zr * zr + zi * zi < 4.0) { //predet calculation to determine if ∈ mandelbrot
+        double temp = zr * zr - zi * zi + cr; 
+        zi = 2.0 * zr * zi + ci;
+        zr = temp; 
+        i++;
+    }
+    return i;
 }
 
 int main () {
