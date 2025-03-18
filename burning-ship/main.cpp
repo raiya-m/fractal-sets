@@ -65,12 +65,23 @@ int main () {
     fout << image_width << " " << image_height << std::endl; 
     fout << "256" << std::endl;
 
-    for (int y = 0; y < image_height; ++y) {
-        for (int x = 0; x < image_width; ++x) {
-            //call functions
+    //pixel by pixel: 
+    for (int y = 0; y < image_height; y++) { 
+        for (int x = 0; x < image_width; x++) {
+            double cr = map_to_real(x, image_width, min_r, max_r);
+            double ci = map_to_imaginary(y, image_height, min_i, max_i);
 
+            int n = find_escape(cr, ci, max_n); 
+
+            //map to rgb value (this'll be greyscale)
+            int r = (n % 255); 
+            int g = (n % 255);
+            int b = (n % 255);
+
+            fout << r << " " << g << " " << b << " ";
         }
+        fout << std::endl; 
     }
-    std::cout << "complete!" << std::endl;
+    std::cout << "complete!" << std::endl; 
     return 0; 
 }
