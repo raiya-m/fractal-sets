@@ -4,7 +4,23 @@
 
 /* 
 
-same concept as mandelbrot, except absolute values are taken; insanely cool visualization
+The burning ship fractal is a variation of the Mandelbrot set. What sets it apart is the use of absolute values in the 
+iteration formula, specifically applied to the real and imaginary components of the complex number during each update. 
+This results in a radically different visual structure from the Mandelbrot set, giving rise to a fractal that looks like 
+a burning ship — hence the name.
+
+The core formula of the burning ship is:  
+  z = (|Re(z)| + i·|Im(z)|)² + c
+
+In practical terms, this means that before squaring the complex number z, both its real and imaginary parts are made positive. 
+This seemingly small twist causes significant changes in the visualization, especially in the lower half of the complex plane. 
+The symmetry is also different: unlike the Mandelbrot set's symmetry across the real axis, the Burning Ship has symmetry only 
+across the x-axis (real axis), leading to a lopsided appearance.
+
+Due to its more complex and jagged boundary structure, the burning ship fractal is often slower to render than the mandelbrot 
+set and exhibits higher sensitivity to pixel resolution and escape conditions. Just like the mandelbrot set, each point in 
+the complex plane is iterated to test for divergence, and those that do not "escape" within a fixed number of iterations are 
+considered part of the fractal and colored accordingly.
 
 */
 
@@ -12,7 +28,6 @@ same concept as mandelbrot, except absolute values are taken; insanely cool visu
 double map_to_real (int x, int image_width, double min_r, double max_r) {
     double range = max_r - min_r; 
     return x * (range/image_width) + min_r; 
-
 }
 
 //map to im
@@ -20,16 +35,17 @@ double map_to_imaginary (int y, int image_height, double min_i, double max_i) {
     double range = max_i - min_i; 
     return y * (range/image_height) + min_i;
 }
+
 //determining the escape value function
 int find_escape(double cr, double ci, int max_iterations) {
     int i = 0; 
     double zr = 0.0; 
     double zi = 0.0; 
 
-    while (i < max_iterations && zr * zr + zi * zi < 4.0) { //predet calculation to determine if ∈ mandelbrot
+    while (i < max_iterations && zr * zr + zi * zi < 4.0) { //predet calculation to determine if ∈ burning ship
         double temp = zr * zr - zi * zi + cr; 
-        zi = 2.0 * zr * zi + ci;
-        zr = temp; 
+        zi = fabs(2.0 * zr * zi) + ci;
+        zr = fabs(temp); 
         i++;
     }
     return i;
