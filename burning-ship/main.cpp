@@ -44,7 +44,7 @@ int find_escape(double cr, double ci, int max_iterations) {
 
     while (i < max_iterations && zr * zr + zi * zi < 4.0) { //predet calculation to determine if ∈ burning ship
         double temp = zr * zr - zi * zi + cr; 
-        zi = fabs(2.0 * zr * zi) + ci;
+        zi = fabs(2.0 * zr * zi) + ci; //make absolute
         zr = fabs(temp); 
         i++;
     }
